@@ -23,15 +23,20 @@ export class LeadController {
   }
 
   @Get()
-  async findAll(@Query('cpf') cpf: string, @Query('cnpj') cnpj: string) {
+  async findAll(
+    @Query('limit') limit: number = 10,
+    @Query('page') page: number = 1,
+    @Query('cpf') cpf: string,
+    @Query('cnpj') cnpj: string,
+  ) {
     console.log(cpf);
 
-    return this.leadService.findAll(cpf, cnpj);
+    return this.leadService.findAll(page, limit, cpf, cnpj);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.leadService.findOne(+id);
+    return this.leadService.findOne(id);
   }
 
   // @Patch(':id')

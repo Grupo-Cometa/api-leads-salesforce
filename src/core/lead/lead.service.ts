@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 // import { UpdateLeadDto } from './dto/update-lead.dto';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { env } from 'process';
-import { salesforceApiGetLeads } from 'src/resources/apis/salesforce.api';
+import {
+  salesforceApiGetLeads,
+  salesforceApiGetOneLead,
+} from 'src/resources/apis/salesforce.api';
 
 @Injectable()
 export class LeadService {
@@ -12,13 +15,22 @@ export class LeadService {
     return 'This action adds a new lead';
   }
 
-  async findAll(cpf: string, cnpj: string) {
-    const soqlQuery = `${cpf} ${cnpj}`;
-    return salesforceApiGetLeads(soqlQuery);
+  async findAll(page: number, limit: number, cpf: string, cnpj: string) {
+    console.log(cpf, cnpj);
+
+    const offset = (page - 1) * limit;
+
+    console.log(page, limit, offset);
+
+    // Construir a consulta SOQL dinamicamente
+    const soqlQuery = `query?q=SELECT+FIELDS(ALL)+FROM+Lead+LIMIT+${limit}+OFFSET+${offset}`;
+
+    const leads = await salesforceApiGetLeads(soqlQuery);
+    return { page, limit, records: leads };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} lead`;
+  findOne(id: string) {
+    return salesforceApiGetOneLead(id);
   }
 
   // update(id: number, updateLeadDto: UpdateLeadDto) {
