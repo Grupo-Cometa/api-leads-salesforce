@@ -20,7 +20,7 @@ export class LeadService {
 
     const offset = (page - 1) * limit;
 
-    console.log(page, limit, offset);
+    // console.log(page, limit, offset);
 
     // Construir a consulta SOQL dinamicamente
     const soqlQuery = `query?q=SELECT+FIELDS(ALL)+FROM+Lead+LIMIT+${limit}+OFFSET+${offset}`;
