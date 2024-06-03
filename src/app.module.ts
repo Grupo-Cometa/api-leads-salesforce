@@ -3,8 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LeadModule } from './core/lead/lead.module';
 import { ConfigModule } from '@nestjs/config';
-import { OpportunityModule } from './opportunity/opportunity.module';
 import configuration from './config/configuration';
+import { OpportunityModule } from './core/opportunity/opportunity.module';
 
 @Module({
   imports: [

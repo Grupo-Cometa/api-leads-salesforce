@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { env } from 'process';
+import { CreateLeadDto } from 'src/core/lead/dto/create-lead.dto';
 
 export async function salesforceApiLogin() {
   const { data } = await axios.post(
@@ -7,6 +8,40 @@ export async function salesforceApiLogin() {
   );
 
   return data;
+}
+
+export async function salesforceApiCreateLead(leadData: CreateLeadDto) {
+  // const restOAuth = await salesforceApiLogin();
+
+  const formatToSalesforceLead = {
+    Company: leadData.company,
+    LastName: leadData.fullName,
+    CPF__c: leadData.cpf,
+    CNPJ__c: leadData.cnpj,
+    MobilePhone: leadData.mobilePhone,
+    Interesse_em__c: leadData.interest, //"NOVOS" - SEMINOVOS - CONSORCIO
+    LeadSource: leadData.leadSource,
+    Concessionaria_Ref__c: leadData.dealershipRef,
+    Email: leadData.email,
+    Aceite_politicas_de_Privacidade__c: leadData.acceptPrivacyPolicies,
+    Receber_ofertas_por_E_mail__c: leadData.receiveEmailOffers,
+    Receber_ofertas_por_SMS__c: leadData.receiveSMSOffers,
+    CPF_colaborador__c: leadData.colabDocument,
+    Email_colaborador__c: leadData.colabEmail,
+    Nome_colaborador__c: leadData.colabFullName,
+  };
+
+  // const { data } = await axios.post(
+  //   `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/sobjects/Lead`,
+  //   formatToSalesforceLead,
+  //   {
+  //     headers: {
+  //       Authorization: `${restOAuth.token_type} ${restOAuth.access_token}`,
+  //     },
+  //   },
+  // );
+
+  return formatToSalesforceLead;
 }
 
 export async function salesforceApiGetLeads(soqlQuery: string) {
