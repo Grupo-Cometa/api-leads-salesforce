@@ -1,4 +1,4 @@
-import { IsBoolean, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class CreateLeadDto {
   @IsString()
@@ -7,9 +7,11 @@ export class CreateLeadDto {
   @IsString()
   fullName: string;
 
+  @IsOptional()
   @IsString()
   cpf: string;
 
+  @IsOptional()
   @IsString()
   cnpj: string;
 
