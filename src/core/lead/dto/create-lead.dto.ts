@@ -1,6 +1,7 @@
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class CreateLeadDto {
+  @IsOptional()
   @IsString()
   company: string;
 

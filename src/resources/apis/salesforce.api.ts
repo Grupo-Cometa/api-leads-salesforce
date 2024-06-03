@@ -11,7 +11,7 @@ export async function salesforceApiLogin() {
 }
 
 export async function salesforceApiCreateLead(leadData: CreateLeadDto) {
-  // const restOAuth = await salesforceApiLogin();
+  const restOAuth = await salesforceApiLogin();
 
   const formatToSalesforceLead = {
     Company: leadData.company,
@@ -31,17 +31,22 @@ export async function salesforceApiCreateLead(leadData: CreateLeadDto) {
     Nome_colaborador__c: leadData.colabFullName,
   };
 
-  // const { data } = await axios.post(
-  //   `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/sobjects/Lead`,
-  //   formatToSalesforceLead,
-  //   {
-  //     headers: {
-  //       Authorization: `${restOAuth.token_type} ${restOAuth.access_token}`,
-  //     },
-  //   },
-  // );
+  const data = await axios
+    .post(
+      `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/sobjects/Lead`,
+      formatToSalesforceLead,
+      {
+        headers: {
+          Authorization: `${restOAuth.token_type} ${restOAuth.access_token}`,
+        },
+      },
+    )
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
 
-  return formatToSalesforceLead;
+  return data;
 }
 
 export async function salesforceApiGetLeads(soqlQuery: string) {
