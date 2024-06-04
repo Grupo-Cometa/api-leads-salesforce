@@ -10,8 +10,8 @@ import {
 @Injectable()
 export class LeadService {
   async create(createLeadDto: CreateLeadDto) {
-    console.log(createLeadDto);
     const lead = await salesforceApiCreateLead(createLeadDto);
+
     return lead;
   }
 

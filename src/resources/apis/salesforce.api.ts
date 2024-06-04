@@ -31,7 +31,7 @@ export async function salesforceApiCreateLead(leadData: CreateLeadDto) {
     Nome_colaborador__c: leadData.colabFullName,
   };
 
-  const data = await axios
+  const { data } = await axios
     .post(
       `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/sobjects/Lead`,
       formatToSalesforceLead,
