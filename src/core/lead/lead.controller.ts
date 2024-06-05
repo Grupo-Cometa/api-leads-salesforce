@@ -28,10 +28,11 @@ export class LeadController {
     @Query('page') page: number = 1,
     @Query('cpf') cpf: string,
     @Query('cnpj') cnpj: string,
+    @Query('lead_source') leadSource: string,
   ) {
     console.log(cpf);
 
-    return this.leadService.findAll(page, limit, cpf, cnpj);
+    return this.leadService.findAll(page, limit, cpf, cnpj, leadSource);
   }
 
   @Get(':id')

@@ -15,13 +15,38 @@ export class LeadService {
     return lead;
   }
 
-  async findAll(page: number, limit: number, cpf: string, cnpj: string) {
+  async findAll(
+    page: number,
+    limit: number,
+    cpf: string,
+    cnpj: string,
+    leadSource: string,
+  ) {
     const offset = (page - 1) * limit;
-    console.log(cpf, cnpj);
 
     // Construir a consulta SOQL dinamicamente
-    const soqlQuery = `query?q=SELECT+FIELDS(ALL)+FROM+Lead+LIMIT+${limit}+OFFSET+${offset}`;
+    // Construir a consulta SOQL dinamicamente
+    let soqlQuery = `query?q=SELECT+FIELDS(ALL)+FROM+Lead`;
 
+    // Adicionar condições se os parâmetros cpf e cnpj existirem
+    const conditions: string[] = [];
+    if (cpf) {
+      conditions.push(`CPF__c='${cpf}'`);
+    }
+    if (cnpj) {
+      conditions.push(`CNPJ__c='${cnpj}'`);
+    }
+    if (leadSource) {
+      conditions.push(`LeadSource='${leadSource}'`);
+    }
+
+    // Adicionar condições à consulta, se houver
+    if (conditions.length > 0) {
+      soqlQuery += `+WHERE+${conditions.join('+AND+')}`;
+    }
+
+    // Adicionar limit e offset
+    soqlQuery += `+LIMIT+${limit}+OFFSET+${offset}`;
     const leads = await salesforceApiGetLeads(soqlQuery);
     return { page, limit, records: leads };
   }

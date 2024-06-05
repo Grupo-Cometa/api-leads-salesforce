@@ -13,13 +13,26 @@ export class OpportunityService {
     return 'This action adds a new opportunity';
   }
 
-  async findAll(limit: number, page: number) {
+  async findAll(limit: number, page: number, leadId: string) {
     const offset = (page - 1) * limit;
 
     // console.log(page, limit, offset);
 
     // Construir a consulta SOQL dinamicamente
-    const soqlQuery = `query?q=SELECT+FIELDS(ALL)+FROM+Opportunity+LIMIT+${limit}+OFFSET+${offset}`;
+    let soqlQuery = `query?q=SELECT+FIELDS(ALL)+FROM+Opportunity`;
+
+    // Adicionar condições se os parâmetros cpf e cnpj existirem
+    const conditions: string[] = [];
+    if (leadId) {
+      conditions.push(`Lead_Convertido__c='${leadId}'`);
+    }
+    // Adicionar condições à consulta, se houver
+    if (conditions.length > 0) {
+      soqlQuery += `+WHERE+${conditions.join('+AND+')}`;
+    }
+
+    // Adicionar limit e offset
+    soqlQuery += `+LIMIT+${limit}+OFFSET+${offset}`;
     const opps = await salesforceApiGetOpportunities(soqlQuery);
 
     return { page, limit, records: opps };

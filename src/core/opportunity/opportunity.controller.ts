@@ -22,8 +22,12 @@ export class OpportunityController {
   // }
 
   @Get()
-  findAll(@Query('limit') limit: number = 10, @Query('page') page: number = 1) {
-    return this.opportunityService.findAll(limit, page);
+  findAll(
+    @Query('limit') limit: number = 10,
+    @Query('page') page: number = 1,
+    @Query('lead') leadId: string,
+  ) {
+    return this.opportunityService.findAll(limit, page, leadId);
   }
 
   @Get(':id')
