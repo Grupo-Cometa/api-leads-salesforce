@@ -17,7 +17,7 @@ export class CreateLeadDto {
   cnpj: string;
 
   @IsString()
-  mobilePhone: number;
+  mobilePhone: string;
 
   @IsString()
   interest: 'NOVOS' | 'SEMINOVOS' | 'CONSORCIO';
@@ -28,6 +28,7 @@ export class CreateLeadDto {
   @IsString()
   dealershipRef: string;
 
+  @IsOptional()
   @IsString()
   email: string;
 
