@@ -1,3 +1,4 @@
+import { HttpException } from '@nestjs/common';
 import axios from 'axios';
 import { env } from 'process';
 import { CreateLeadDto } from 'src/core/lead/dto/create-lead.dto';
@@ -41,9 +42,13 @@ export async function salesforceApiCreateLead(leadData: CreateLeadDto) {
         },
       },
     )
-    .catch((err) => {
+    .catch(async (err) => {
       console.log(err);
-      return err;
+      await axios.post(
+        'https://webhook.site/6721350a-0f5f-42d2-a541-50450527ecf0',
+        err,
+      );
+      throw new HttpException('Create Salesforce Lead error', err);
     });
 
   return data;

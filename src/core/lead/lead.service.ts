@@ -46,7 +46,7 @@ export class LeadService {
     }
 
     // Adicionar limit e offset
-    soqlQuery += `+LIMIT+${limit}+OFFSET+${offset}`;
+    soqlQuery += `+ORDER+BY+CreatedDate+DESC+LIMIT+${limit}+OFFSET+${offset}`;
     const leads = await salesforceApiGetLeads(soqlQuery);
     return { page, limit, records: leads };
   }
