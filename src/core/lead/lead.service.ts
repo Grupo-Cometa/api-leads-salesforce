@@ -21,6 +21,7 @@ export class LeadService {
     cpf: string,
     cnpj: string,
     leadSource: string,
+    dealershipRef: string,
   ) {
     if (limit > 200) {
       limit = 200;
@@ -41,6 +42,9 @@ export class LeadService {
     }
     if (leadSource) {
       conditions.push(`LeadSource='${leadSource}'`);
+    }
+    if (dealershipRef) {
+      conditions.push(`Concessionaria_Ref__c='${dealershipRef}'`);
     }
 
     // Adicionar condições à consulta, se houver

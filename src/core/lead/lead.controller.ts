@@ -29,8 +29,16 @@ export class LeadController {
     @Query('cpf') cpf: string,
     @Query('cnpj') cnpj: string,
     @Query('lead_source') leadSource: string,
+    @Query('dealership_ref') dealershipRef: string,
   ) {
-    return this.leadService.findAll(page, limit, cpf, cnpj, leadSource);
+    return this.leadService.findAll(
+      page,
+      limit,
+      cpf,
+      cnpj,
+      leadSource,
+      dealershipRef,
+    );
   }
 
   @Get(':id')
