@@ -22,6 +22,9 @@ export class LeadService {
     cnpj: string,
     leadSource: string,
   ) {
+    if (limit > 200) {
+      limit = 200;
+    }
     const offset = (page - 1) * limit;
 
     // Construir a consulta SOQL dinamicamente

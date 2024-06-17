@@ -30,8 +30,6 @@ export class LeadController {
     @Query('cnpj') cnpj: string,
     @Query('lead_source') leadSource: string,
   ) {
-    console.log(cpf);
-
     return this.leadService.findAll(page, limit, cpf, cnpj, leadSource);
   }
 

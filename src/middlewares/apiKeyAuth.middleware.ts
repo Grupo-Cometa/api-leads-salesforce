@@ -6,7 +6,6 @@ import { env } from 'process';
 export class apiKeyMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
     const validApiKeys = env.VALID_API_KEYS.split('|'); // Lista de chaves válidas    next();
-    // console.log(validApiKeys);
 
     const headers = req.headers['x-api-token'] as string;
 

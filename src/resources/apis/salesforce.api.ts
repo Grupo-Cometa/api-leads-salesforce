@@ -1,4 +1,4 @@
-import { HttpException } from '@nestjs/common';
+import { HttpException, HttpStatus } from '@nestjs/common';
 import axios from 'axios';
 import { env } from 'process';
 import { CreateLeadDto } from 'src/core/lead/dto/create-lead.dto';
@@ -43,12 +43,13 @@ export async function salesforceApiCreateLead(leadData: CreateLeadDto) {
       },
     )
     .catch(async (err) => {
-      console.log(err);
-      await axios.post(
-        'https://webhook.site/6721350a-0f5f-42d2-a541-50450527ecf0',
-        err,
+      throw new HttpException(
+        'Create Salesforce Lead error',
+        HttpStatus.BAD_REQUEST,
+        {
+          cause: new Error(err),
+        },
       );
-      throw new HttpException('Create Salesforce Lead error', err);
     });
 
   return data;
@@ -56,16 +57,21 @@ export async function salesforceApiCreateLead(leadData: CreateLeadDto) {
 
 export async function salesforceApiGetLeads(soqlQuery: string) {
   const restOAuth = await salesforceApiLogin();
-  console.log(soqlQuery);
 
-  const { data } = await axios.get(
-    `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/${soqlQuery}`,
-    {
-      headers: {
-        Authorization: `${restOAuth.token_type} ${restOAuth.access_token}`,
+  const { data } = await axios
+    .get(
+      `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/${soqlQuery}`,
+      {
+        headers: {
+          Authorization: `${restOAuth.token_type} ${restOAuth.access_token}`,
+        },
       },
-    },
-  );
+    )
+    .catch((err) => {
+      throw new HttpException('Unable to get Leads.', HttpStatus.BAD_REQUEST, {
+        cause: err,
+      });
+    });
 
   const formattedData = data.records.map((data) => {
     return {
@@ -115,14 +121,24 @@ export async function salesforceApiGetOneLead(leadId: string) {
 export async function salesforceApiGetOpportunities(soqlQuery: string) {
   const restOAuth = await salesforceApiLogin();
 
-  const { data } = await axios.get(
-    `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/${soqlQuery}`,
-    {
-      headers: {
-        Authorization: `${restOAuth.token_type} ${restOAuth.access_token}`,
+  const { data } = await axios
+    .get(
+      `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/${soqlQuery}`,
+      {
+        headers: {
+          Authorization: `${restOAuth.token_type} ${restOAuth.access_token}`,
+        },
       },
-    },
-  );
+    )
+    .catch((err) => {
+      throw new HttpException(
+        'Unable to get Opportunities.',
+        HttpStatus.BAD_REQUEST,
+        {
+          cause: err,
+        },
+      );
+    });
 
   const formattedData = data.records.map((data) => {
     return {
@@ -130,11 +146,13 @@ export async function salesforceApiGetOpportunities(soqlQuery: string) {
       fullname: data.Name,
       cpf: data.CPF__c,
       cnpj: data.CNPJ__c,
+      stageName: data.StageName,
+      invoiced: data.Cotacao_Faturada__c,
+      recordTypeId: data.RecordTypeId,
       interest: data.Interesse_em__c,
       leadSource: data.LeadSource,
       createdDate: data.CreatedDate,
       dealership: data.Concessionaria_Ref__c,
-      stageName: data.StageName,
       ownerNameMKT: data.NomeProprietarioMKT__c,
     };
   });

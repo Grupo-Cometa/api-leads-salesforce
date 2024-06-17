@@ -14,9 +14,10 @@ export class OpportunityService {
   }
 
   async findAll(limit: number, page: number, leadId: string) {
+    if (limit > 200) {
+      limit = 200;
+    }
     const offset = (page - 1) * limit;
-
-    // console.log(page, limit, offset);
 
     // Construir a consulta SOQL dinamicamente
     let soqlQuery = `query?q=SELECT+FIELDS(ALL)+FROM+Opportunity`;
