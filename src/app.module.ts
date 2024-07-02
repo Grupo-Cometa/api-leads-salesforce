@@ -6,12 +6,14 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { OpportunityModule } from './core/opportunity/opportunity.module';
 import { apiKeyMiddleware } from './middlewares/apiKeyAuth.middleware';
+import { QuoteModule } from './core/quote/quote.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration] }),
     LeadModule,
     OpportunityModule,
+    QuoteModule,
   ],
   controllers: [AppController],
   providers: [AppService],

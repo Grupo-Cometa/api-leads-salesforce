@@ -184,3 +184,50 @@ export async function salesforceApiGetOneOpportunity(oppId: string) {
     ownerNameMKT: data.NomeProprietarioMKT__c,
   };
 }
+
+export async function salesforceApiGetByQuery(soqlQuery: string) {
+  const restOAuth = await salesforceApiLogin();
+
+  const { data } = await axios
+    .get(
+      `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/${soqlQuery}`,
+      {
+        headers: {
+          Authorization: `${restOAuth.token_type} ${restOAuth.access_token}`,
+        },
+      },
+    )
+    .catch((err) => {
+      throw new HttpException('Unable to get Quotes.', HttpStatus.BAD_REQUEST, {
+        cause: err,
+      });
+    });
+
+  return data.records;
+}
+
+export async function salesforceApiGetOneQuote(quoteId: string) {
+  const restOAuth = await salesforceApiLogin();
+
+  const { data } = await axios.get(
+    `${restOAuth.instance_url}/services/data/${env.SALESFORCE_API_VERSION}/sobjects/Quote/${quoteId}`,
+    {
+      headers: {
+        Authorization: `${restOAuth.token_type} ${restOAuth.access_token}`,
+      },
+    },
+  );
+
+  return {
+    sfId: data.Id,
+    fullname: data.Name,
+    cpf: data.CPF__c,
+    cnpj: data.CNPJ__c,
+    interest: data.Interesse_em__c,
+    leadSource: data.LeadSource,
+    createdDate: data.CreatedDate,
+    dealership: data.Concessionaria_Ref__c,
+    stageName: data.StageName,
+    ownerNameMKT: data.NomeProprietarioMKT__c,
+  };
+}
