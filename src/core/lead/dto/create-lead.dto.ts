@@ -44,6 +44,7 @@ export class CreateLeadDto {
   @IsString()
   colabDocument: string;
 
+  @IsOptional()
   @IsString()
   colabEmail: string;
 
