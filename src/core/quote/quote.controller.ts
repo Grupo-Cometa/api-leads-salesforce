@@ -10,7 +10,8 @@ export class QuoteController {
     @Query('limit') limit: number = 10,
     @Query('page') page: number = 1,
     @Query('opportunity') opportunityId: string,
+    @Query('quote_number') quoteNumber: string,
   ) {
-    return this.quoteService.findAll(limit, page, opportunityId);
+    return this.quoteService.findAll(limit, page, opportunityId, quoteNumber);
   }
 }
