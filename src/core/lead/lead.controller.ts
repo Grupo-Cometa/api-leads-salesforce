@@ -30,6 +30,7 @@ export class LeadController {
     @Query('cnpj') cnpj: string,
     @Query('lead_source') leadSource: string,
     @Query('dealership_ref') dealershipRef: string,
+    @Query('mobile_phone') mobilePhone: string,
   ) {
     return this.leadService.findAll(
       page,
@@ -38,6 +39,7 @@ export class LeadController {
       cnpj,
       leadSource,
       dealershipRef,
+      mobilePhone,
     );
   }
 
