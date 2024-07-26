@@ -87,6 +87,7 @@ export async function salesforceApiGetLeads(soqlQuery: string) {
       sellerLead: data.VendedorLead__c,
       createdDate: data.CreatedDate,
       dealership: data.Concessionaria_Ref__c,
+      recordTypeId: data.RecordTypeId,
     };
   });
   return formattedData;
@@ -117,6 +118,7 @@ export async function salesforceApiGetOneLead(leadId: string) {
     sellerLead: data.VendedorLead__c,
     createdDate: data.CreatedDate,
     dealership: data.Concessionaria_Ref__c,
+    recordTypeId: data.RecordTypeId,
   };
 }
 

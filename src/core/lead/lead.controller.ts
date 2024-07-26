@@ -31,6 +31,7 @@ export class LeadController {
     @Query('lead_source') leadSource: string,
     @Query('dealership_ref') dealershipRef: string,
     @Query('mobile_phone') mobilePhone: string,
+    @Query('record_type_id') recordTypeId: string,
   ) {
     return this.leadService.findAll(
       page,
@@ -40,6 +41,7 @@ export class LeadController {
       leadSource,
       dealershipRef,
       mobilePhone,
+      recordTypeId,
     );
   }
 

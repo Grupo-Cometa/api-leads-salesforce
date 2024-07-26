@@ -23,6 +23,7 @@ export class LeadService {
     leadSource: string,
     dealershipRef: string,
     mobilePhone: string,
+    recordTypeId: string,
   ) {
     if (limit > 200) {
       limit = 200;
@@ -49,6 +50,9 @@ export class LeadService {
     }
     if (mobilePhone) {
       conditions.push(`mobilePhone='${mobilePhone}'`);
+    }
+    if (recordTypeId) {
+      conditions.push(`RecordTypeId='${recordTypeId}'`);
     }
 
     // Adicionar condições à consulta, se houver
