@@ -1,0 +1,184 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Cometa - Salesforce API",
+        "description": "ADD DESCRIPTION",
+        "version": "0.0.1",
+        "contact": {
+            "name": "PLACEHOLDER",
+            "url": "hpptp://PLACEHOLDER",
+            "email": "PLACEHOLDER@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://18.231.178.248.nip.io"
+        }
+    ],
+    "paths": {
+        "/List Leads/": {
+            "get": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "Get all leads",
+                "description": "Get all leads",
+                "operationId": "getLeads",
+                "parameters": [
+                    {
+                        "required": false,
+                        "schema": {
+                            "title": "dealership_ref",
+                            "type": "string"
+                        },
+                        "name": "dealership_ref",
+                        "in": "query"
+                    },
+                    {
+                        "required": false,
+                        "schema": {
+                            "title": "limit",
+                            "type": "integer"
+                        },
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "required": false,
+                        "schema": {
+                            "title": "page",
+                            "type": ""
+                        },
+                        "name": "page",
+                        "in": "query"  
+                    },
+                    {
+                        "required": false,
+                        "schema": {
+                            "title": "cpf",
+                            "type": "string"
+                        },
+                        "name": "cpf",
+                        "in": "query"
+                    },
+                    {
+                        "required": false,
+                        "schema": {
+                            "title": "mobile_phone",
+                            "type": "string"
+                        },
+                        "name": "mobile_phone",
+                        "in": "query"
+                    },
+                    {
+                        "required": false,
+                        "schema": {
+                            "title": "record_type_id",
+                            "type": "string"
+                        },
+                        "name": "record_type_id",
+                        "in": "query"
+                    }
+
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Lead"
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            }
+        },
+        "/Get Lead by ID/": {
+            "get": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "Get Lead by ID",
+                "description": "Get Lead by ID",
+                "operationId": "getLeadById",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "id",
+                            "type": "string"
+                        },
+                        "name": "id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Lead"
+                                }
+                            } 
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]   
+            }
+        },
+        "/Create New Lead/": {
+            "post": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "Create New Lead",
+                "description": "Create New Lead",
+                "operationId": "createNewLead",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "lead",
+                            "type": "object"
+                        },
+                        "name": "lead",
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Lead"
+                                }
+                            } 
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            }
+        }
+    }
+}
