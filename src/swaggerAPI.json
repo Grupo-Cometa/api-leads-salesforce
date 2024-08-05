@@ -16,7 +16,7 @@
         }
     ],
     "paths": {
-        "/List Leads/": {
+        "/listLeads/": {
             "get": {
                 "tags": [
                     "Leads"
@@ -90,7 +90,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Lead"
+                                        "$ref": "#/components/schemas/listLeads"
                                     }
                                 }
                             } 
@@ -150,17 +150,15 @@
                 "summary": "Create New Lead",
                 "description": "Create New Lead",
                 "operationId": "createNewLead",
-                "parameters": [
-                    {
-                        "required": true,
-                        "schema": {
-                            "title": "lead",
-                            "type": "object"
-                        },
-                        "name": "lead",
-                        "in": "body"
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Lead"
+                            }
+                        }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Successful Response",
@@ -180,13 +178,13 @@
                 ]
             }
         },
-        "/List Opportunities/": {
+        "/listOpportunities/": {
             "get": {
                 "tags": [
                     "Opportunity"
                 ],
-                "summary": "List Opportunities",
-                "description": "List Opportunities",
+                "summary": "ListOpportunities",
+                "description": "ListOpportunities",
                 "operationId": "listOpportunities",
                 "parameters": [
                     {
@@ -216,7 +214,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Opportunity"
+                                        "$ref": "#/components/schemas/listOpportunities"
                                     }
                                 }
                             } 
@@ -266,6 +264,193 @@
                         "ApiKeyAuth": []
                     }
                 ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "listLeads": {
+                "title": "Lead",
+                "required": [
+                    "page",
+                    "limit",
+                    "records"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "title": "page",
+                        "type": "integer"
+                    },
+                    "limit": {
+                        "title": "limit",
+                        "type": "integer"
+                    },
+                    "records": {
+                        "title": "records",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Lead"
+                        }
+                    }
+                }
+            },
+            "Lead": {
+                "title": "Lead",
+                "required": [
+                    "sfId",
+                    "fullname",
+                    "cpf",
+                    "company",
+                    "cnpj",
+                    "mobilePhone",
+                    "interest",
+                    "leadSource",
+                    "status",
+                    "sellerLead",
+                    "createdDate",
+                    "dealership",
+                    "recordTypeId"
+                ],
+                "type": "object",
+                "properties": {
+                    "sfId": {
+                        "title": "sfId",
+                        "type": "string"
+                    },
+                    "fullname": {
+                        "title": "fullname",
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "title": "cpf",
+                        "type": "string"
+                    },
+                    "company": {
+                        "title": "company",
+                        "type": "string"
+                    },
+                    "cnpj": {
+                        "title": "cnpj",
+                        "type": "string"
+                    },
+                    "mobilePhone": {
+                        "title": "mobilePhone",
+                        "type": "string"
+                    },
+                    "interest": {
+                        "title": "interest",
+                        "type": "string"
+                    },
+                    "leadSource": {
+                        "title": "leadSource",
+                        "type": "string"
+                    },
+                    "status": {
+                        "title": "status",
+                        "type": "string"
+                    },
+                    "sellerLead": {
+                        "title": "sellerLead",
+                        "type": "string"
+                    },
+                    "createdDate": {
+                        "title": "createdDate",
+                        "type": "string"
+                    },
+                    "dealership": {
+                        "title": "dealership",
+                        "type": "string"
+                    },
+                    "recordTypeId": {
+                        "title": "recordTypeId",
+                        "type": "string"
+                    }
+                }
+            },
+            "listOpportunities": {
+                "title": "Opportunity",
+                "required": [
+                    "page",
+                    "limit",
+                    "records"
+                ],
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "title": "page",
+                        "type": "integer"
+                    },
+                    "limit": {
+                        "title": "limit",
+                        "type": "integer"
+                    },
+                    "records": {
+                        "title": "records",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Opportunity"
+                        }
+                    }
+                }
+            },
+            "Opportunity": {
+                "title": "Opportunity",
+                "required": [
+                    "sfId",
+                    "fullname",
+                    "stageName",
+                    "invoice",
+                    "recordTypeId",
+                    "interest",
+                    "leadSource",
+                    "createdDate",
+                    "dealership",
+                    "ownerNameMKT"
+                ],
+                "type": "object",
+                "properties": {
+                    "sfId": {
+                        "title": "sfId",
+                        "type": "string"
+                    },
+                    "fullname": {
+                        "title": "fullname",
+                        "type": "string"
+                    },
+                    "stageName": {
+                        "title": "stageName",
+                        "type": "string"
+                    },
+                    "invoice": {
+                        "title": "invoice",
+                        "type": "string"
+                    },
+                    "recordTypeId": {
+                        "title": "recordTypeId",
+                        "type": "string"
+                    },
+                    "interest": {
+                        "title": "interest",
+                        "type": "string"
+                    },
+                    "leadSource": {
+                        "title": "leadSource",
+                        "type": "string"
+                    },
+                    "createdDate": {
+                        "title": "createdDate",
+                        "type": "string"
+                    },
+                    "dealership": {
+                        "title": "dealership",
+                        "type": "string"
+                    },
+                    "ownerNameMKT": {
+                        "title": "ownerNameMKT",
+                        "type": "string"
+                    }
+                }
             }
         }
     }
