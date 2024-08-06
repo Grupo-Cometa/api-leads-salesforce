@@ -30,6 +30,7 @@ export async function salesforceApiCreateLead(leadData: CreateLeadDto) {
     CPF_colaborador__c: leadData.colabDocument,
     Email_colaborador__c: leadData.colabEmail,
     Nome_colaborador__c: leadData.colabFullName,
+    Observacoes_Gerais__c: leadData.observations,
   };
 
   const { data } = await axios
@@ -88,6 +89,7 @@ export async function salesforceApiGetLeads(soqlQuery: string) {
       createdDate: data.CreatedDate,
       dealership: data.Concessionaria_Ref__c,
       recordTypeId: data.RecordTypeId,
+      observations: data.Observacoes_Gerais__c,
     };
   });
   return formattedData;
@@ -119,6 +121,7 @@ export async function salesforceApiGetOneLead(leadId: string) {
     createdDate: data.CreatedDate,
     dealership: data.Concessionaria_Ref__c,
     recordTypeId: data.RecordTypeId,
+    observations: data.Observacoes_Gerais__c,
   };
 }
 
@@ -158,6 +161,7 @@ export async function salesforceApiGetOpportunities(soqlQuery: string) {
       createdDate: data.CreatedDate,
       dealership: data.Concessionaria_Ref__c,
       ownerNameMKT: data.NomeProprietarioMKT__c,
+      observations: data.Observacoes_Gerais__c,
     };
   });
   return formattedData;
@@ -186,6 +190,7 @@ export async function salesforceApiGetOneOpportunity(oppId: string) {
     dealership: data.Concessionaria_Ref__c,
     stageName: data.StageName,
     ownerNameMKT: data.NomeProprietarioMKT__c,
+    observations: data.Observacoes_Gerais__c,
   };
 }
 

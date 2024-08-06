@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 // import { UpdateLeadDto } from './dto/update-lead.dto';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import {
@@ -10,6 +10,15 @@ import {
 @Injectable()
 export class LeadService {
   async create(createLeadDto: CreateLeadDto) {
+    if (
+      createLeadDto.interest === 'CAPTACAO DE VEICULOS' &&
+      !createLeadDto.observations
+    ) {
+      throw new HttpException(
+        'Field "observation" is required for interest type: CAPTACAO DE VEICULOS',
+        404,
+      );
+    }
     const lead = await salesforceApiCreateLead(createLeadDto);
 
     return lead;

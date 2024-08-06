@@ -1,5 +1,11 @@
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsEnum, IsOptional, IsString } from 'class-validator';
 
+export enum LeadInterest {
+  NOVOS = 'NOVOS',
+  SEMINOVOS = 'SEMINOVOS',
+  CONSORCIO = 'CONSORCIO',
+  CAPTACAO = 'CAPTACAO DE VEICULOS',
+}
 export class CreateLeadDto {
   @IsOptional()
   @IsString()
@@ -19,8 +25,8 @@ export class CreateLeadDto {
   @IsString()
   mobilePhone: string;
 
-  @IsString()
-  interest: 'NOVOS' | 'SEMINOVOS' | 'CONSORCIO';
+  @IsEnum(LeadInterest)
+  interest: LeadInterest;
 
   @IsString()
   leadSource: string;
@@ -50,4 +56,8 @@ export class CreateLeadDto {
 
   @IsString()
   colabFullName: string;
+
+  @IsOptional()
+  @IsString()
+  observations: string;
 }

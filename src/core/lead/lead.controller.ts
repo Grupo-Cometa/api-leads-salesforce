@@ -6,6 +6,7 @@ import {
   // Patch,
   Param,
   Query,
+  ValidationPipe,
 
   // Delete,
 } from '@nestjs/common';
@@ -18,7 +19,7 @@ export class LeadController {
   constructor(private readonly leadService: LeadService) {}
 
   @Post()
-  create(@Body() createLeadDto: CreateLeadDto) {
+  create(@Body(new ValidationPipe()) createLeadDto: CreateLeadDto) {
     return this.leadService.create(createLeadDto);
   }
 
