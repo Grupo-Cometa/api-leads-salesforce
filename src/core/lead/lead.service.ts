@@ -33,13 +33,16 @@ export class LeadService {
     dealershipRef: string,
     mobilePhone: string,
     recordTypeId: string,
+    interest: string,
   ) {
     if (limit > 200) {
       limit = 200;
     }
     const offset = (page - 1) * limit;
 
-    // Construir a consulta SOQL dinamicamente
+    //TO DO
+    // Validar informações dos parâmetros para não quebrar a consulta no SF
+
     // Construir a consulta SOQL dinamicamente
     let soqlQuery = `query?q=SELECT+FIELDS(ALL)+FROM+Lead`;
 
@@ -62,6 +65,9 @@ export class LeadService {
     }
     if (recordTypeId) {
       conditions.push(`RecordTypeId='${recordTypeId}'`);
+    }
+    if (interest) {
+      conditions.push(`Interesse_em__c='${interest}'`);
     }
 
     // Adicionar condições à consulta, se houver
