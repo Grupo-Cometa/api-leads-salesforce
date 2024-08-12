@@ -78,6 +78,15 @@
                         },
                         "name": "record_type_id",
                         "in": "query"
+                    },
+                    {
+                        "required": false,
+                        "schema": {
+                            "title": "interest",
+                            "type": "string"
+                        },
+                        "name": "interest",
+                        "in": "query"
                     }
 
 
@@ -318,7 +327,8 @@
                     "sellerLead",
                     "createdDate",
                     "dealership",
-                    "recordTypeId"
+                    "recordTypeId",
+                    "observation"
                 ],
                 "type": "object",
                 "properties": {
@@ -373,8 +383,13 @@
                     "recordTypeId": {
                         "title": "recordTypeId",
                         "type": "string"
-                    }
+                    },
+                    "observation": {
+                "title": "Observação",
+                "type": "string",
+                "description": "Observações adicionais sobre o lead"
                 }
+            }
             },
             "listOpportunities": {
                 "title": "Opportunity",
