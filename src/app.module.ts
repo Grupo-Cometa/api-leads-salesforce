@@ -18,10 +18,8 @@ import { QuoteModule } from './core/quote/quote.module';
   controllers: [AppController],
   providers: [AppService],
 })
-
-  export class AppModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-      consumer.apply(apiKeyMiddleware).forRoutes('*');
-    }
-
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(apiKeyMiddleware).forRoutes('*');
+  }
 }
