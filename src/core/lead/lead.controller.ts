@@ -6,6 +6,7 @@ import {
   // Patch,
   Param,
   Query,
+  ValidationPipe,
 
   // Delete,
 } from '@nestjs/common';
@@ -18,7 +19,7 @@ export class LeadController {
   constructor(private readonly leadService: LeadService) {}
 
   @Post()
-  create(@Body() createLeadDto: CreateLeadDto) {
+  create(@Body(new ValidationPipe()) createLeadDto: CreateLeadDto) {
     return this.leadService.create(createLeadDto);
   }
 
@@ -32,6 +33,7 @@ export class LeadController {
     @Query('dealership_ref') dealershipRef: string,
     @Query('mobile_phone') mobilePhone: string,
     @Query('record_type_id') recordTypeId: string,
+    @Query('interest') interest: string,
   ) {
     return this.leadService.findAll(
       page,
@@ -42,6 +44,7 @@ export class LeadController {
       dealershipRef,
       mobilePhone,
       recordTypeId,
+      interest,
     );
   }
 

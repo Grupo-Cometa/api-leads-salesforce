@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 // import { UpdateLeadDto } from './dto/update-lead.dto';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import {
@@ -10,6 +10,15 @@ import {
 @Injectable()
 export class LeadService {
   async create(createLeadDto: CreateLeadDto) {
+    if (
+      createLeadDto.interest === 'CAPTACAO DE VEICULOS' &&
+      !createLeadDto.observations
+    ) {
+      throw new HttpException(
+        'Field "observation" is required for interest type: CAPTACAO DE VEICULOS',
+        404,
+      );
+    }
     const lead = await salesforceApiCreateLead(createLeadDto);
 
     return lead;
@@ -24,13 +33,16 @@ export class LeadService {
     dealershipRef: string,
     mobilePhone: string,
     recordTypeId: string,
+    interest: string,
   ) {
     if (limit > 200) {
       limit = 200;
     }
     const offset = (page - 1) * limit;
 
-    // Construir a consulta SOQL dinamicamente
+    //TO DO
+    // Validar informações dos parâmetros para não quebrar a consulta no SF
+
     // Construir a consulta SOQL dinamicamente
     let soqlQuery = `query?q=SELECT+FIELDS(ALL)+FROM+Lead`;
 
@@ -53,6 +65,9 @@ export class LeadService {
     }
     if (recordTypeId) {
       conditions.push(`RecordTypeId='${recordTypeId}'`);
+    }
+    if (interest) {
+      conditions.push(`Interesse_em__c='${interest}'`);
     }
 
     // Adicionar condições à consulta, se houver
