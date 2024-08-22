@@ -25,28 +25,31 @@
           {
             "required": false,
             "schema": {
-              "title": "apelido_concessionária",
+              "title": "dealership_ref",
               "type": "string"
             },
-            "name": "apelido_concessionária",
+            "name": "dealership_ref",
+            "description": "Apelido da concessionária",
             "in": "query"
           },
           {
             "required": false,
             "schema": {
-              "title": "limite",
+              "title": "limit",
               "type": "integer"
             },
-            "name": "limite",
+            "name": "limit",
+            "description": "Limite",
             "in": "query"
           },
           {
             "required": false,
             "schema": {
-              "title": "página",
+              "title": "page",
               "type": "integer"
             },
-            "name": "página",
+            "name": "page",
+            "description": "Página",
             "in": "query"
           },
           {
@@ -56,15 +59,17 @@
               "type": "string"
             },
             "name": "cpf",
+            "description": "CPF",
             "in": "query"
           },
           {
             "required": false,
             "schema": {
-              "title": "celular",
+              "title": "mobile_phone",
               "type": "string"
             },
-            "name": "celular",
+            "name": "mobile_phone",
+            "description": "Celular",
             "in": "query"
           },
           {
@@ -74,15 +79,17 @@
               "type": "string"
             },
             "name": "record_type_id",
+            "description": "Record Type ID",
             "in": "query"
           },
           {
             "required": false,
             "schema": {
-              "title": "interesse",
+              "title": "interest",
               "type": "string"
             },
-            "name": "interesse",
+            "name": "interest",
+            "description": "Interesse",
             "in": "query"
           }
         ],
@@ -140,7 +147,7 @@
         ]
       }
     },
-    "/leads/:id": {
+    "/leads/[id]": {
       "get": {
         "tags": ["Leads"],
         "summary": "Buscar Lead por ID",
@@ -154,6 +161,7 @@
               "type": "string"
             },
             "name": "id",
+            "description": "ID da Lead",
             "in": "query"
           }
         ],
@@ -186,19 +194,21 @@
           {
             "required": false,
             "schema": {
-              "title": "página",
+              "title": "page",
               "type": "integer"
             },
-            "name": "página",
+            "name": "page",
+            "description": "Página",
             "in": "query"
           },
           {
             "required": false,
             "schema": {
-              "title": "limite",
+              "title": "limit",
               "type": "integer"
             },
-            "name": "limite",
+            "name": "limit",
+            "description": "Limite",
             "in": "query"
           }
         ],
@@ -224,7 +234,7 @@
         ]
       }
     },
-    "/oportunidades/:id": {
+    "/oportunidades/[id]": {
       "get": {
         "tags": ["Oportunidades"],
         "summary": "Buscar Oportunidade por ID",
@@ -238,6 +248,7 @@
               "type": "string"
             },
             "name": "id",
+            "description": "ID da Oportunidade",
             "in": "query"
           }
         ],
@@ -503,3 +514,4 @@
     }
   }
 }
+
