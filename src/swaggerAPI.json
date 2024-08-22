@@ -15,7 +15,7 @@
     }
   ],
   "paths": {
-    "/leads": {
+    "/lead": {
       "get": {
         "tags": ["Leads"],
         "summary": "Buscar lista de Leads",
@@ -147,7 +147,7 @@
         ]
       }
     },
-    "/leads/{id}": {
+    "/lead/{id}": {
       "get": {
         "tags": ["Leads"],
         "summary": "Buscar Lead por ID",
@@ -184,7 +184,7 @@
         ]
       }
     },
-    "/oportunidades": {
+    "/opportunity": {
       "get": {
         "tags": ["Oportunidades"],
         "summary": "Buscar lista de Oportunidades",
@@ -234,7 +234,7 @@
         ]
       }
     },
-    "/oportunidades/{id}": {
+    "/opportunity/{id}": {
       "get": {
         "tags": ["Oportunidades"],
         "summary": "Buscar Oportunidade por ID",
