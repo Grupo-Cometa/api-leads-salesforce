@@ -21,8 +21,8 @@
                 "tags": [
                     "Leads"
                 ],
-                "summary": "Get all leads",
-                "description": "Get all leads",
+                "summary": "Buscar lista de Leads",
+                "description": "Buscar lista de Leads",
                 "operationId": "getLeads",
                 "parameters": [
                     {
@@ -93,7 +93,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful Response",
+                        "description": "Resposta com sucesso",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -116,8 +116,8 @@
                 "tags": [
                     "Leads"
                 ],
-                "summary": "Create New Lead",
-                "description": "Create New Lead",
+                "summary": "Criar nova Lead",
+                "description": "Criar nova Lead",
                 "operationId": "createNewLead",
                 "requestBody": {
                     "content": {
@@ -130,7 +130,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Successful Response",
+                        "description": "Resposta com sucesso",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -152,8 +152,8 @@
                 "tags": [
                     "Leads"
                 ],
-                "summary": "Get Lead by ID",
-                "description": "Get Lead by ID",
+                "summary": "Buscar Lead por ID",
+                "description": "Buscar Lead por ID",
                 "operationId": "getLeadById",
                 "parameters": [
                     {
@@ -168,7 +168,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful Response",
+                        "description": "Resposta com sucesso",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -185,13 +185,13 @@
                 ]   
             }
         },
-        "/opportunities/": {
+        "/oportunidades/": {
             "get": {
                 "tags": [
-                    "Opportunity"
+                    "Oportunidades"
                 ],
-                "summary": "ListOpportunities",
-                "description": "ListOpportunities",
+                "summary": "Buscar lista de Oportunidades",
+                "description": "Buscar lista de Oportunidades",
                 "operationId": "listOpportunities",
                 "parameters": [
                     {
@@ -215,7 +215,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful Response",
+                        "description": "Resposta com sucesso",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -235,13 +235,13 @@
                 ]
             }
         },
-        "/opportunities/:id": {
+        "/oportunidades/:id": {
             "get": {
                 "tags": [
-                    "Opportunity"
+                    "Oportunidades"
                 ],
-                "summary": "Get Opportunity by ID",
-                "description": "Get Opportunity by ID",
+                "summary": "Buscar Oportunidade por ID",
+                "description": "Buscar Oportunidade por ID",
                 "operationId": "getOpportunityById",
                 "parameters": [
                     {
@@ -256,7 +256,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful Response",
+                        "description": "Resposta com sucesso",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -278,8 +278,8 @@
         "securitySchemes": {
             "ApiKeyAuth": {
             "type": "apiKey",
-            "name": "Authorization",
-            "description": "Enter your x-api-key header",
+            "name": "Autorização",
+            "description": "Insira a sua chave de autorização (x-api-key)",
             "in": "header"
             }
         },
@@ -351,6 +351,10 @@
                         "type": "string"
                     },
                     "sellerLead": {
+                        "title": "sellerLead",
+                        "type": "string"
+                    },
+                    "observations": {
                         "title": "sellerLead",
                         "type": "string"
                     }
@@ -511,6 +515,10 @@
                     },
                     "ownerNameMKT": {
                         "title": "ownerNameMKT",
+                        "type": "string"
+                    },
+                    "observations": {
+                        "title": "sellerLead",
                         "type": "string"
                     }
                 }
