@@ -9,7 +9,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-  
-  await app.listen(3333);
+
+  await app.listen(3000);
 }
 bootstrap();
