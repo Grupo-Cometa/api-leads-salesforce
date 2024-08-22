@@ -1,0 +1,505 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cometa - Salesforce API",
+    "description": "Documentação oficial da API de integração Cometa - Salesforce",
+    "version": "0.0.1",
+    "contact": {
+      "name": "Dompixel",
+      "email": "contato@dompixel.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "apisalesforce.indique.ai"
+    }
+  ],
+  "paths": {
+    "/leads/": {
+      "get": {
+        "tags": ["Leads"],
+        "summary": "Buscar lista de Leads",
+        "description": "Buscar lista de Leads",
+        "operationId": "getLeads",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "apelido_concessionária",
+              "type": "string"
+            },
+            "name": "apelido_concessionária",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "limite",
+              "type": "integer"
+            },
+            "name": "limite",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "página",
+              "type": "integer"
+            },
+            "name": "página",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "cpf",
+              "type": "string"
+            },
+            "name": "cpf",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "celular",
+              "type": "string"
+            },
+            "name": "celular",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "record_type_id",
+              "type": "string"
+            },
+            "name": "record_type_id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "interesse",
+              "type": "string"
+            },
+            "name": "interesse",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/listLeads"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Leads"],
+        "summary": "Criar nova Lead",
+        "description": "Criar nova Lead",
+        "operationId": "createNewLead",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeadPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeadPost"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/leads/:id": {
+      "get": {
+        "tags": ["Leads"],
+        "summary": "Buscar Lead por ID",
+        "description": "Buscar Lead por ID",
+        "operationId": "getLeadById",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lead"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/oportunidades/": {
+      "get": {
+        "tags": ["Oportunidades"],
+        "summary": "Buscar lista de Oportunidades",
+        "description": "Buscar lista de Oportunidades",
+        "operationId": "listOpportunities",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "página",
+              "type": "integer"
+            },
+            "name": "página",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "limite",
+              "type": "integer"
+            },
+            "name": "limite",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/listOpportunities"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/oportunidades/:id": {
+      "get": {
+        "tags": ["Oportunidades"],
+        "summary": "Buscar Oportunidade por ID",
+        "description": "Buscar Oportunidade por ID",
+        "operationId": "getOpportunityById",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Opportunity"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "name": "Autorização",
+        "description": "Insira a sua chave de autorização (x-api-key)",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "listLeads": {
+        "title": "listLead",
+        "required": ["page", "limit", "records"],
+        "type": "object",
+        "properties": {
+          "page": {
+            "title": "page",
+            "type": "integer"
+          },
+          "limit": {
+            "title": "limit",
+            "type": "integer"
+          },
+          "records": {
+            "title": "records",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Lead"
+            }
+          }
+        }
+      },
+      "Lead": {
+        "title": "Lead",
+        "required": ["recordTypeId"],
+        "type": "object",
+        "properties": {
+          "sfId": {
+            "title": "sfId",
+            "type": "string"
+          },
+          "fullname": {
+            "title": "fullname",
+
+            "type": "string"
+          },
+          "cpf": {
+            "title": "cpf",
+            "type": "string"
+          },
+          "company": {
+            "title": "company",
+            "type": "string"
+          },
+          "cnpj": {
+            "title": "cnpj",
+            "type": "string"
+          },
+          "mobilePhone": {
+            "title": "mobilePhone",
+            "type": "string"
+          },
+          "interest": {
+            "title": "interest",
+            "type": "string"
+          },
+          "status": {
+            "title": "status",
+            "type": "string"
+          },
+          "sellerLead": {
+            "title": "sellerLead",
+            "type": "string"
+          },
+          "observations": {
+            "title": "sellerLead",
+            "type": "string"
+          }
+        }
+      },
+      "LeadPost": {
+        "title": "Lead",
+        "required": [
+          "fullName",
+          "cpf",
+          "mobilePhone",
+          "interest",
+          "leadSource",
+          "dealershipRef",
+          "acceptPrivacyPolicies",
+          "receiveEmailOffers",
+          "receiveSMSOffers",
+          "colabDocument",
+          "colabFullName"
+        ],
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "title": "fullName",
+            "type": "string"
+          },
+          "cpf": {
+            "title": "cpf",
+            "type": "string"
+          },
+          "mobilePhone": {
+            "title": "mobilePhone",
+            "type": "string"
+          },
+          "email": {
+            "title": "email",
+            "type": "string"
+          },
+          "interest": {
+            "title": "interest",
+            "type": "string"
+          },
+          "leadSource": {
+            "title": "leadSource",
+            "type": "string"
+          },
+          "dealershipRef": {
+            "title": "dealershipRef",
+            "type": "string"
+          },
+          "acceptPrivacyPolicies": {
+            "title": "acceptPrivacyPolicies",
+            "type": "boolean"
+          },
+          "receiveEmailOffers": {
+            "title": "receiveEmailOffers",
+            "type": "boolean"
+          },
+          "receiveSMSOffers": {
+            "title": "receiveSMSOffers",
+            "type": "boolean"
+          },
+          "colabDocument": {
+            "title": "colabDocument",
+            "type": "string"
+          },
+          "colabEmail": {
+            "title": "colabEmail",
+            "type": "string"
+          },
+          "colabFullName": {
+            "title": "colabFullName",
+            "type": "string"
+          },
+          "observations": {
+            "title": "observations",
+            "type": "string"
+          }
+        }
+      },
+      "listOpportunities": {
+        "title": "listOpportunities",
+        "required": ["page", "limit", "records"],
+        "type": "object",
+        "properties": {
+          "page": {
+            "title": "page",
+            "type": "integer"
+          },
+          "limit": {
+            "title": "limit",
+            "type": "integer"
+          },
+          "records": {
+            "title": "records",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Opportunity"
+            }
+          }
+        }
+      },
+      "Opportunity": {
+        "title": "Opportunities",
+        "required": [
+          "sfId",
+          "fullname",
+          "stageName",
+          "invoice",
+          "recordTypeId",
+          "interest",
+          "leadSource",
+          "createdDate",
+          "dealership",
+          "ownerNameMKT"
+        ],
+        "type": "object",
+        "properties": {
+          "sfId": {
+            "title": "sfId",
+            "type": "string"
+          },
+          "fullname": {
+            "title": "fullname",
+            "type": "string"
+          },
+          "stageName": {
+            "title": "stageName",
+            "type": "string"
+          },
+          "invoice": {
+            "title": "invoice",
+            "type": "string"
+          },
+          "recordTypeId": {
+            "title": "recordTypeId",
+            "type": "string"
+          },
+          "interest": {
+            "title": "interest",
+            "type": "string"
+          },
+          "leadSource": {
+            "title": "leadSource",
+            "type": "string"
+          },
+          "createdDate": {
+            "title": "createdDate",
+            "type": "string"
+          },
+          "dealership": {
+            "title": "dealership",
+            "type": "string"
+          },
+          "ownerNameMKT": {
+            "title": "ownerNameMKT",
+            "type": "string"
+          },
+          "observations": {
+            "title": "sellerLead",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
