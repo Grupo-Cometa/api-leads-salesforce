@@ -276,7 +276,7 @@
     "securitySchemes": {
       "ApiKeyAuth": {
         "type": "apiKey",
-        "name": "Autorização",
+        "name": "Authorization",
         "description": "Insira a sua chave de autorização (x-api-key)",
         "in": "header"
       }
