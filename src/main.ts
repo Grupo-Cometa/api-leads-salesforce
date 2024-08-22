@@ -10,6 +10,6 @@ async function bootstrap() {
 
   app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   
-  await app.listen(3000);
+  await app.listen(3333);
 }
 bootstrap();
