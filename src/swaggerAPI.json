@@ -9,11 +9,7 @@
       "email": "contato@dompixel.com"
     }
   },
-  "servers": [
-    {
-      "url": "apisalesforce.indique.ai"
-    }
-  ],
+
   "paths": {
     "/lead": {
       "get": {
@@ -107,12 +103,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
+        }
       },
       "post": {
         "tags": ["Leads"],
@@ -139,12 +130,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
+        }
       }
     },
     "/lead/{id}": {
@@ -176,12 +162,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
+        }
       }
     },
     "/opportunity": {
@@ -226,12 +207,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
+        }
       }
     },
     "/opportunity/{id}": {
@@ -263,12 +239,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
+        }
       }
     }
   },
@@ -276,7 +247,7 @@
     "securitySchemes": {
       "ApiKeyAuth": {
         "type": "apiKey",
-        "name": "Authorization",
+        "name": "x-api-key",
         "description": "Insira a sua chave de autorização (x-api-key)",
         "in": "header"
       }
@@ -512,6 +483,11 @@
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+    "ApiKeyAuth": []
+    }
+  ]
 }
 
