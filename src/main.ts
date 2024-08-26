@@ -5,7 +5,7 @@ import swaggerUi from 'swagger-ui-express';
 import * as swaggerDocument from './swaggerAPI.json';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalPipes(new ValidationPipe());
 
   app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
