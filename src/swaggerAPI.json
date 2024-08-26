@@ -10,6 +10,12 @@
     }
   },
 
+  "servers": [
+    {
+      "url": "https://apisalesforce.indique.ai"
+    }
+  ],
+  
   "paths": {
     "/lead": {
       "get": {
