@@ -10,6 +10,12 @@
     }
   },
 
+  "servers": [
+    {
+      "url": "https://apisalesforce.indique.ai"
+    }
+  ],
+  
   "paths": {
     "/lead": {
       "get": {
@@ -247,8 +253,8 @@
     "securitySchemes": {
       "ApiKeyAuth": {
         "type": "apiKey",
-        "name": "x-api-key",
-        "description": "Insira a sua chave de autorização (x-api-key)",
+        "name": "x-api-token",
+        "description": "Insira a sua chave de autorização (x-api-token)",
         "in": "header"
       }
     },
