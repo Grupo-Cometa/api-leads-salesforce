@@ -19,6 +19,16 @@ export class LeadService {
         404,
       );
     }
+
+    if (
+      (createLeadDto.cnpj && !createLeadDto.company) ||
+      (!createLeadDto.cnpj && createLeadDto.company)
+    ) {
+      throw new HttpException(
+        'Invalid format: creating a lead with cnpj requires the company field',
+        404,
+      );
+    }
     const lead = await salesforceApiCreateLead(createLeadDto);
 
     return lead;
